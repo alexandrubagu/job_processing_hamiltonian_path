@@ -11,7 +11,7 @@ defmodule JobProcessing.JobsExecution do
   @doc """
   Generates all possible execution paths for a given job and returns the one containing all task names.
   """
-  @spec new(Job.t()) :: {:ok, Job.t()} | {:error, :circular_dependency_detected}
+  @spec new(Job.t()) :: {:ok, Job.t()} | {:error, :circular_dependency_detected} | {:error, :no_path_found}
   def new(%Job{} = job) do
     %__MODULE__{tasks_lookup: build_tasks_lookup(job.tasks)}
     |> generate_execution_paths()
